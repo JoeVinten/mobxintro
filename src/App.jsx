@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+
 import { observer } from "mobx-react";
 
-const App = ({ myCounter }) => {
+const App = () => {
+  const [countState, setCountState] = useState(0);
+
+  const decrease = () => setCountState(countState - 1);
+  const increace = () => setCountState(countState + 1);
+
+  const isNegative = () => (countState < 0 ? "Yes" : "No");
   return (
-    <React.Fragment>
-      Count: {myCounter.count} <hr />
-      Is negative? {myCounter.isNegative}
+    <>
+      Count: {countState} <hr />
+      Is negative? {isNegative()}
       <hr />
-      <button onClick={myCounter.increase.bind(myCounter)}>Add</button>
-      <button onClick={myCounter.decrease.bind(myCounter)}>Subtract</button>
-    </React.Fragment>
+      <button onClick={decrease}>Add</button>
+      <button onClick={increace}>Subtract</button>
+    </>
   );
 };
 observer(App);
